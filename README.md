@@ -23,3 +23,5 @@ comparable elements to test CVM on. Currently (below v1), there is no guarentee
 the algorithm will work correctly. After we've developed a large and robust test
 suite and can establish the algorithm is behaving as expected, this library will
 be promoted to v1 and maintained.
+
+The Bible is included for testing purposes. There's no copyright in the Kingdom of Heaven. 
