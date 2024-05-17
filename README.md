@@ -1,6 +1,6 @@
-# CVM
+# f0
 
-## An implementation of the CVM algorithm for the distinct elements problem.
+## An implementation of the CVM algorithm for the distinct elements (f0) problem.
 
 This package implements the [CVM](https://arxiv.org/abs/2301.10191) algoritm in
 pure Go. CVM is an algorithm for the distinct elements problem. When you're
