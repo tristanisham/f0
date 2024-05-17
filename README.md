@@ -5,7 +5,7 @@
 This package implements the [CVM](https://arxiv.org/abs/2301.10191) algoritm in
 pure Go. CVM is an algorithm for the distinct elements problem. When you're
 trying to find the unique elements in a slice, but the slice exceeds the amount
-of available memory, use CVM to estimate the number of unique elements in said
+of available memory, use f0 to estimate the number of unique elements in said
 slice.
 
 ```go
@@ -19,7 +19,7 @@ f0.Estimate(mySlice, 0.01, 0.001) // 329.4221234
 ## Contributing
 
 I **NEED** tests. The problem with this algorithm is that I need large sets of
-comparable elements to test CVM on. Currently (below v1), there is no guarentee
+comparable elements to test f0 on. Currently (below v1), there is no guarentee
 the algorithm will work correctly. After we've developed a large and robust test
 suite and can establish the algorithm is behaving as expected, this library will
 be promoted to v1 and maintained.
