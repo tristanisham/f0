@@ -49,6 +49,7 @@ func Count[T comparable](source []T, memory int) float64 {
 				for n := 0; n < round; n++ {
 					if c := coin(); c != previousCoin {
 						delete(pen, t)
+						break
 					} else {
 						previousCoin = c
 					}
