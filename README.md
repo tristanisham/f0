@@ -9,7 +9,7 @@ of available memory, use CVM to estimate the number of unique elements in said
 slice.
 
 ```go
-cvm.Count(s, 100) // 1500
+f0.Estimate(mySlice, 0.01, 0.001) // 329.4221234
 ```
 
 ### More Reading
