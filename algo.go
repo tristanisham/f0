@@ -2,11 +2,12 @@
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
-// cvm is an implementation of the CVM algorithm for the distinct elements problem.
-// 	- https://arxiv.org/abs/2301.10191
+// f0 is an implementation of the CVM algorithm for the distinct elements problem.
+//   - https://arxiv.org/abs/2301.10191
+//
 // The CVM algorithm is best suited for large datasets where sorting unique values would require
-// more than available memory. 
-package cvm
+// more than available memory.
+package f0
 
 import (
 	"math"
@@ -29,41 +30,38 @@ func randClean[T comparable](s map[T]struct{}) {
 
 }
 
-// Count uses the CVM algorithm to calculate the number of unique item in an array.
-// The accuracy of the CVM algorithm is dependent on the size of its memory. The larger the memory
-// in comparison to the orignial slice size, the more accurate the estimation, with 100% accuracy when
-// the size and memory are equal.
-func Count[T comparable](source []T, memory int) float64 {
-	mem := memory
-	if memory == 0 {
-		mem = 100
-	}
+// Estimate uses the CVM algorithm to calculate the number of unique item in an array.
+// e (epsilon) represents acceptable relative error
+// d (delta) represents the probability of failure for the algorithm to produce an estimation within the specific
+// e-bound.
+func Estimate[T comparable](source []T, e, d float64) float64 {
 
-	pen := make(map[T]struct{})
-	var round int = 1
+	x := make(map[T]struct{})
 
-	for _, t := range source {
-		if len(pen) < mem {
-			if _, found := pen[t]; found {
-				previousCoin := coin()
-				for n := 0; n < round; n++ {
-					if c := coin(); c != previousCoin {
-						delete(pen, t)
-						break
-					} else {
-						previousCoin = c
-					}
-				}
+	p := 1.0
+	m := len(source)
 
-			} else {
-				pen[t] = struct{}{}
+	thresh := math.Ceil(12.0/e*e) * math.Log2(8.0*float64(m)/d)
+
+	for _, item := range source {
+
+		if p == 0.5 {
+			if coin() {
+				x[item] = struct{}{}
 			}
-		} else {
-			randClean(pen)
-			round++
+		} else if p == 1 {
+			if _, ok := x[item]; !ok {
+				x[item] = struct{}{}
+			}
 		}
+
+		if math.Abs(float64(len(x))) == thresh {
+			randClean(x)
+			p = p / 2
+
+		}
+
 	}
 
-	probability := math.Pow(0.5, 6.0)
-	return float64(len(pen)) / probability
+	return math.Abs(float64(len(x))) / p
 }

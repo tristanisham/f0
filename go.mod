@@ -1,3 +1,3 @@
-module github.com/tristanisham/cvm
+module github.com/tristanisham/f0
 
-go 1.22.2
+go 1.22.3
