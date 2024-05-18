@@ -31,7 +31,7 @@ func randClean[T comparable](s map[T]struct{}) {
 }
 
 // Estimate uses the CVM algorithm to calculate the number of unique item in an array.
-// e (epsilon) represents acceptable relative error
+// e (epsilon) represents acceptable relative error.
 // d (delta) represents the probability of failure for the algorithm to produce an estimation within the specific
 // e-bound.
 func Estimate[T comparable](source []T, e, d float64) float64 {
